@@ -1,5 +1,5 @@
 {
-  "processed_at": "2026-10-30T17:11:13.924409+00:00",
+  "processed_at": "2026-10-30T17:15:35.362265+00:00",
   "overall_status": "ok",
   "schedule": {
     "cron": "15 7 * * *",
@@ -14,7 +14,7 @@
   },
   "reddit": {
     "status": "not_configured",
-    "attempted_at": "2026-10-30T17:11:03.352769+00:00",
+    "attempted_at": "2026-10-30T17:15:35.249755+00:00",
     "prediction_scope": "Modèles Amazon appliqués sans adaptation à des discussions Reddit ; qualité non évaluée sur Reddit."
   },
   "notes": [

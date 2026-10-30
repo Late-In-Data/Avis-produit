@@ -11,7 +11,7 @@ const percent = n => new Intl.NumberFormat('fr-FR',{style:'percent',maximumFract
 const decimal = n => new Intl.NumberFormat('fr-FR',{maximumFractionDigits:3,minimumFractionDigits:3}).format(n);
 let modelPromise;
 async function getModel(){
-  if (!modelPromise) modelPromise = fetch('model.json').then(r=>{if(!r.ok) throw new Error('model');return r.json()}).catch(e=>{modelPromise=null;throw e});
+  if (!modelPromise) modelPromise = fetch('model.json',{cache:'no-store'}).then(r=>{if(!r.ok) throw new Error('model');return r.json()}).catch(e=>{modelPromise=null;throw e});
   return modelPromise;
 }
 function cleanText(text){
@@ -41,7 +41,7 @@ form.addEventListener('submit', async event=>{
 });
 async function renderResults(){
   try{
-    const response=await fetch('results.json');if(!response.ok) throw new Error('results');const data=await response.json();
+    const response=await fetch('results.json',{cache:'no-store'});if(!response.ok) throw new Error('results');const data=await response.json();
     const rows=[['Toujours positif · test initial',data.initial.split_counts.test,data.initial.baseline],['TF-IDF · test initial',data.initial.split_counts.test,data.initial.test],['TF-IDF · période postérieure',data.robustness.temporal.counts.test,data.robustness.temporal.test],['TF-IDF · produits inconnus',data.robustness.unseen_products.counts.test,data.robustness.unseen_products.test]];
     if(data.transformer) rows.push(['DistilBERT SST-2 · test initial',data.transformer.test_rows,data.transformer.transformer.metrics]);
     const body=byId('evaluation-rows');body.replaceChildren();
