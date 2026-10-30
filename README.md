@@ -10,6 +10,8 @@ Le projet comprend maintenant des stress tests temporels et par produit inconnu,
 
 **[Essayer la démonstration web](https://late-in-data.github.io/Avis-produit/)** · [Code et rapports](https://github.com/Late-In-Data/Avis-produit) · [Tests automatisés](https://github.com/Late-In-Data/Avis-produit/actions)
 
+![Résultats de la démonstration publique](docs/screenshots/demo-publique.jpg)
+
 ## Ouvrir la version installée
 
 Depuis le dossier `Avis-produit`, dans PowerShell :

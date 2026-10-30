@@ -22,3 +22,12 @@ Limites analytiques visibles dans l'application et le README : labels indirects 
 - Démonstration navigateur vérifiée localement : exemples positif et négatif correctement classés et absence d'appel d'inférence externe. Les champs de texte utilisent un affichage texte et les exports neutralisent les formules CSV.
 - Dépôt public créé sur GitHub ; GitHub Pages déployé. La première CI a révélé une attente erronée sur un fichier local, corrigée par un saut explicite. Le pipeline complet Linux a ensuite révélé une assertion de navigation exigeant une carte métrique sur une vue tabulaire, également corrigée. La vérification finale du pipeline complet est suivie dans GitHub Actions.
 - Dockerfile fourni et documenté, non construit ici : Docker n'est pas installé.
+
+## État final vérifié
+
+- Suite locale : 11 tests réussis en 16,39 s après la correction de navigation.
+- CI GitHub sur le code final : [réussie](https://github.com/Late-In-Data/Avis-produit/actions/runs/41009484672).
+- Pipeline complet Linux sur ce même code, avec téléchargement SNAP, entraînement et stress tests : [réussi](https://github.com/Late-In-Data/Avis-produit/actions/runs/41009508178). Les tests d'annotations détaillées locales et de prédictions transformer locales y sont sautés explicitement ; ils sont exécutés dans la suite locale.
+- [Déploiement GitHub Pages réussi](https://github.com/Late-In-Data/Avis-produit/actions/runs/41009484693). Le site public affiche les cinq lignes du tableau de résultats et les métriques finales du transformer.
+- Prédictions contrôlées sur le site public : exemple positif à 98,1 % de score positif ; exemple négatif à 0,1 %. Capture de la page des résultats sauvegardée dans `docs/screenshots/demo-publique.jpg`.
+- Copie Sites déployée avec succès, accès privé au propriétaire conservé. Les annotations détaillées ne figurent dans aucun des déploiements ou dans les fichiers suivis par Git.
