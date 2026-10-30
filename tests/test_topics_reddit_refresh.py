@@ -2,6 +2,8 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from types import SimpleNamespace
 import json
+import shutil
+import subprocess
 
 import pandas as pd
 import pytest
@@ -9,6 +11,8 @@ import pytest
 from sentiment import reddit
 from sentiment.topics import build_topics, assign_topics
 from scripts.refresh_daily import public_reddit_summary, make_snapshot
+from sentiment.data import ROOT, MODEL_PATH
+from sentiment.frozen_model import restore_frozen_model
 
 
 def test_praw_client_is_read_only_without_contacting_reddit():
@@ -17,6 +21,20 @@ def test_praw_client_is_read_only_without_contacting_reddit():
                          user_agent="windows:avis-produit-tests:v1.0 (by /u/test)",
                          check_for_async=False, check_for_updates=False, timeout=15)
     assert client.read_only is True
+
+
+@pytest.mark.skipif(not (ROOT/"data/processed/test_predictions.parquet").exists() or shutil.which("node") is None,
+                    reason="Textes du test et Node.js requis pour la parité indépendante")
+def test_restored_model_has_exactly_the_published_predictions(tmp_path):
+    import numpy as np
+    restored = restore_frozen_model(ROOT/"portfolio/dist/model.json", tmp_path/"model.joblib")
+    test = pd.read_parquet(ROOT/"data/processed/test_predictions.parquet")
+    result = subprocess.run(["node", str(ROOT/"scripts/check_browser_model.mjs")],
+                            input=json.dumps(test.text.tolist(), ensure_ascii=True), text=True,
+                            encoding="utf-8", capture_output=True, check=True, timeout=120)
+    reference = json.loads(result.stdout)
+    assert restored.predict(test.text).tolist() == [row["label"] for row in reference]
+    np.testing.assert_allclose(restored.predict_proba(test.text)[:, 1], [row["positive"] for row in reference], atol=1e-12, rtol=0)
 
 
 def test_topics_preserve_counts_and_handle_unknown_terms():

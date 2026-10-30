@@ -33,7 +33,6 @@ jobs:
             data/raw/finefoods.txt.gz
             data/processed/reviews.parquet
             data/processed/topic_assignments.parquet
-            models/sentiment.joblib
             models/topics.joblib
             reports/topics.json
       - name: Collecter si configuré et recalculer les agrégats

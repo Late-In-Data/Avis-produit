@@ -1,6 +1,6 @@
 {
   "texts_checked": 5555,
   "label_mismatches": 0,
-  "maximum_absolute_probability_difference": 6.661338147750939e-16,
+  "maximum_absolute_probability_difference": 5.551115123125783e-16,
   "scope": "Tous les textes nettoyés du test initial et quatre cas de bord ; même pipeline exporté, sans réentraînement."
 }

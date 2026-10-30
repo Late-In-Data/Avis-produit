@@ -13,6 +13,7 @@ import joblib
 import pandas as pd
 
 from sentiment.data import ROOT, SAMPLE_PATH, MODEL_PATH, AUDIT_PATH
+from sentiment.frozen_model import restore_frozen_model
 from sentiment.reddit import REDDIT_SNAPSHOT, run_collection
 from sentiment.storage import write_json
 from sentiment.topics import TOPIC_MODEL, TOPIC_REPORT, TOPIC_ASSIGNMENTS, corpus_fingerprint, assign_topics
@@ -64,8 +65,8 @@ def main():
         parser.error("--skip-reddit et --require-reddit sont incompatibles")
     if not SAMPLE_PATH.exists() or not AUDIT_PATH.exists():
         execute("prepare_data.py")
-    if not MODEL_PATH.exists():
-        execute("train.py")
+    # Toujours conserver le modèle évalué : aucune réoptimisation silencieuse sur un autre OS.
+    model = restore_frozen_model(ROOT / "portfolio/dist/model.json", ROOT / "models/public_sentiment.joblib")
     frame = pd.read_parquet(SAMPLE_PATH)
     rebuild = not all(path.exists() for path in [TOPIC_MODEL, TOPIC_REPORT, TOPIC_ASSIGNMENTS])
     if not rebuild:
@@ -75,11 +76,12 @@ def main():
     now = datetime.now(timezone.utc)
     status = dict(status="disabled", attempted_at=now.isoformat()) if args.skip_reddit else run_collection()
     reddit_frame = pd.read_parquet(REDDIT_SNAPSHOT) if status["status"] == "ok" else None
-    summary = public_reddit_summary(status, reddit_frame, joblib.load(MODEL_PATH), joblib.load(TOPIC_MODEL))
+    summary = public_reddit_summary(status, reddit_frame, model, joblib.load(TOPIC_MODEL))
     topics = json.loads(TOPIC_REPORT.read_text(encoding="utf-8"))
     audit = json.loads(AUDIT_PATH.read_text(encoding="utf-8"))
     # Exporter les résultats avant le témoin de traitement terminé.
-    execute("export_portfolio.py")
+    # Les assets de sentiment et leurs résultats évalués restent ceux suivis par Git.
+    # Ne pas les régénérer depuis un éventuel entraînement local plus récent.
     write_json(ROOT / "portfolio/dist/topics.json", topics)
     report = make_snapshot(audit, topics, summary, datetime.now(timezone.utc))
     write_json(ROOT / "data/live/daily_refresh.json", report)
