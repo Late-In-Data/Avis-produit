@@ -26,7 +26,8 @@ def main():
     (target / "model.json").write_text(json.dumps(exported, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     results = {}
     for key, filename in [("initial", "metrics.json"), ("robustness", "robustness.json"),
-                          ("review", "assisted_review_summary.json"), ("transformer", "transformer_benchmark.json")]:
+                          ("review", "assisted_review_summary.json"), ("transformer", "transformer_benchmark.json"),
+                          ("comparison", "model_comparison.json")]:
         path = ROOT / "reports" / filename
         if path.exists():
             results[key] = json.loads(path.read_text(encoding="utf-8"))

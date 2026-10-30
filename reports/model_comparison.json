@@ -1,0 +1,11 @@
+{
+  "difference_transformer_minus_lexical": -0.09708338048596143,
+  "percentile_interval_95": [
+    -0.11135088423923761,
+    -0.0821111766047298
+  ],
+  "bootstrap_repetitions": 2000,
+  "seed": 2026,
+  "test_rows": 5551,
+  "limitations": "Bootstrap apparié par avis sur le test partagé ; suppose des avis indépendants. Ne corrige pas les dépendances entre produits/auteurs ni les biais de labels ou de corpus."
+}

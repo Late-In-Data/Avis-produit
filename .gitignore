@@ -18,3 +18,4 @@ portfolio/.openai/
 !reports/assisted_review_summary.json
 !reports/transformer_benchmark.json
 !reports/browser_parity.json
+!reports/model_comparison.json

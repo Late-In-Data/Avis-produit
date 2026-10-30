@@ -245,6 +245,11 @@ else:
         st.caption(f"Même test de {benchmark['test_rows']} avis. DistilBERT est préentraîné sur SST-2, sans adaptation Amazon ; {benchmark['truncated_reviews']} textes sont tronqués aux {benchmark['max_length']} premiers tokens. Débit mesuré sur CPU après échauffement, tokenisation comprise ; ce n’est pas une latence de requête isolée. Le transformer est calculé par lots, le modèle lexical sur le test complet.")
         st.caption(f"Mémoire observée du processus de benchmark : {benchmark['transformer']['observed_process_rss_mb']:.0f} Mo. Inclut Torch, les données et le modèle ; ne mesure pas la mémoire isolée du transformer.")
         st.link_button("Lire la fiche du modèle comparé", f"https://huggingface.co/{benchmark['model_id']}")
+        interval_path = ROOT / "reports/model_comparison.json"
+        if interval_path.exists():
+            interval = load_json("reports/model_comparison.json", interval_path.stat().st_mtime)
+            low, high = interval["percentile_interval_95"]
+            st.caption(f"Écart de macro-F1 (transformer − lexical) : {interval['difference_transformer_minus_lexical']:+.4f}, intervalle bootstrap apparié à 95 % [{low:+.4f} ; {high:+.4f}]. Rééchantillonnage par avis ; les dépendances entre auteurs et produits ne sont pas corrigées.")
     review_path = ROOT / "reports/assisted_review.csv"
     if review_path.exists():
         st.subheader("Revue qualitative de 80 avis")

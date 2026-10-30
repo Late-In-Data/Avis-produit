@@ -66,9 +66,10 @@ Pour reproduire les étapes complémentaires :
 ```powershell
 .venv\Scripts\python.exe scripts\evaluate_robustness.py
 .venv\Scripts\python.exe scripts\prepare_review.py
-.venv\Scripts\python.exe scripts\summarize_review.py
+if (Test-Path reports\assisted_annotations.csv) { .venv\Scripts\python.exe scripts\summarize_review.py }
 uv pip install --python .venv\Scripts\python.exe -r requirements-evaluation.txt
 .venv\Scripts\python.exe scripts\benchmark_transformer.py
+.venv\Scripts\python.exe scripts\compare_models.py
 .venv\Scripts\python.exe scripts\export_portfolio.py
 .venv\Scripts\python.exe scripts\check_export.py
 ```
@@ -129,6 +130,25 @@ Le test temporel suit un entraînement jusqu'au 8 février 2012, une validation 
 La lecture assistée repère notamment des négations, des comparaisons, des aspects opposés, deux contradictions possibles entre une note élevée et un texte négatif, ainsi que dix exemples hors alimentation. Les proportions de ce sous-ensemble enrichi en erreurs ne s'extrapolent pas au corpus. **Ce n'est pas une annotation humaine indépendante.** Un formulaire sans note ni prédiction se génère pour une future revue humaine ; il n'a pas été rempli au nom d'un humain.
 
 Le test initial a maintenant été inspecté. Toute optimisation motivée par ces observations doit être évaluée sur un nouveau jeu réservé. La classification reste positif/négatif ; aucune capacité par aspect n'est revendiquée.
+
+### Comparaison avec un transformer préentraîné
+
+DistilBERT SST-2 est comparé sans adaptation Amazon sur les **mêmes 5 551 avis** du test initial. Révision figée : `714eb0fa89d2f80546fda750413ed43d93601a13`.
+
+| Mesure | TF-IDF + régression logistique | DistilBERT SST-2 |
+| --- | ---: | ---: |
+| Accuracy | 92,65 % | 84,24 % |
+| Macro-F1 | 0,869 | 0,772 |
+| Rappel négatif | 84,61 % | 91,90 % |
+| Précision négative | 72,66 % | 49,66 % |
+| Débit CPU, ms par avis | 0,29 | 193,53 |
+| Artefact lexical / poids transformer | 2,71 Mo | 255,43 Mo |
+
+DistilBERT repère plus d'avis négatifs (794 contre 731), mais classe à tort 805 avis positifs comme négatifs, contre 275 pour la régression. Le macro-F1 baisse de **0,0971** ; intervalle bootstrap apparié à 95 % sur cette différence : **[−0,1114 ; −0,0821]**, avec 2 000 réplications par avis et graine 2026. Ce bootstrap suppose des avis indépendants et ne corrige pas les dépendances entre auteurs/produits.
+
+Mesure sur CPU AMD64, 4 threads PyTorch, après échauffement et tokenisation comprise : 1 074,29 secondes pour DistilBERT par lots de 8, contre 1,62 seconde pour le pipeline lexical sur le test complet. **Il s'agit d'un débit moyen, pas d'une latence de requête isolée.** 313 textes sont tronqués aux 256 premiers tokens pour DistilBERT ; le modèle lexical utilise tout le texte. La RSS observée du processus de benchmark (~427 Mo) inclut Torch, les données et le modèle et ne constitue pas la mémoire isolée du transformer.
+
+**Décision : conserver le pipeline lexical en démonstration.** Cette expérience compare un modèle adapté au corpus et un modèle préentraîné SST-2 sans adaptation ; elle ne prouve pas qu'un transformer adapté à Amazon serait inférieur. Aucun nouveau champion n'est sélectionné par réglage sur ce test déjà inspecté. [Fiche officielle DistilBERT](https://huggingface.co/distilbert/distilbert-base-uncased-finetuned-sst-2-english).
 
 ### Démonstration web et inférence locale
 

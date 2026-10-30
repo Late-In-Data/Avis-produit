@@ -7,7 +7,6 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import pandas as pd
-from sklearn.base import clone
 from sklearn.dummy import DummyClassifier
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression

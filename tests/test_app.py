@@ -41,4 +41,7 @@ def test_evaluation_and_sources_pages():
     for page in ["Évaluation", "Analyse approfondie", "Données et méthode"]:
         at.radio(key="page").set_value(page).run()
         assert not at.exception
-        assert at.metric
+        if page == "Analyse approfondie":
+            assert at.dataframe
+        else:
+            assert at.metric

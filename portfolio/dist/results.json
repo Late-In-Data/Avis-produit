@@ -516,5 +516,130 @@
       "Les comptes décrivent ces 80 avis et ne sont pas des estimations du corpus.",
       "Le test a maintenant été inspecté ; il ne doit plus guider des ajustements présentés comme évalués indépendamment."
     ]
+  },
+  "transformer": {
+    "model_id": "distilbert/distilbert-base-uncased-finetuned-sst-2-english",
+    "revision": "714eb0fa89d2f80546fda750413ed43d93601a13",
+    "device": "cpu",
+    "threads": 4,
+    "torch_version": "2.15.0+cpu",
+    "processor": "AMD64 Family 23 Model 104 Stepping 1, AuthenticAMD",
+    "protocol": "Modèle SST-2 prédéfini, sans adaptation Amazon ni réglage sur le test. Même test de 5551 avis que la V1. Pas de sélection d'un nouveau champion sur ces résultats.",
+    "test_rows": 5551,
+    "batch_size": 8,
+    "max_length": 256,
+    "truncated_reviews": 313,
+    "transformer": {
+      "metrics": {
+        "accuracy": 0.8423707440100883,
+        "macro_f1": 0.7717286566969597,
+        "report": {
+          "Négatif": {
+            "precision": 0.4965603502188868,
+            "recall": 0.9189814814814815,
+            "f1-score": 0.6447421843280552,
+            "support": 864.0
+          },
+          "Positif": {
+            "precision": 0.9822874493927125,
+            "recall": 0.8282483464902923,
+            "f1-score": 0.8987151290658641,
+            "support": 4687.0
+          },
+          "accuracy": 0.8423707440100883,
+          "macro avg": {
+            "precision": 0.7394238998057996,
+            "recall": 0.8736149139858869,
+            "f1-score": 0.7717286566969597,
+            "support": 5551.0
+          },
+          "weighted avg": {
+            "precision": 0.906685177065891,
+            "recall": 0.8423707440100883,
+            "f1-score": 0.8591848418647352,
+            "support": 5551.0
+          }
+        },
+        "confusion_matrix": [
+          [
+            794,
+            70
+          ],
+          [
+            805,
+            3882
+          ]
+        ]
+      },
+      "inference_seconds": 1074.2921216999966,
+      "milliseconds_per_review": 193.53127755359336,
+      "load_and_download_seconds": 11.104860300009022,
+      "observed_process_rss_mb": 426.7578125,
+      "weights_mb": 255.4250316619873
+    },
+    "logistic": {
+      "metrics": {
+        "accuracy": 0.9264997297784183,
+        "macro_f1": 0.8688120371829211,
+        "report": {
+          "Négatif": {
+            "precision": 0.7266401590457257,
+            "recall": 0.8460648148148148,
+            "f1-score": 0.7818181818181819,
+            "support": 864.0
+          },
+          "Positif": {
+            "precision": 0.9707370737073707,
+            "recall": 0.9413270748879881,
+            "f1-score": 0.9558058925476604,
+            "support": 4687.0
+          },
+          "accuracy": 0.9264997297784183,
+          "macro avg": {
+            "precision": 0.8486886163765481,
+            "recall": 0.8936959448514015,
+            "f1-score": 0.8688120371829211,
+            "support": 5551.0
+          },
+          "weighted avg": {
+            "precision": 0.9327439671918489,
+            "recall": 0.9264997297784183,
+            "f1-score": 0.928725117539505,
+            "support": 5551.0
+          }
+        },
+        "confusion_matrix": [
+          [
+            731,
+            133
+          ],
+          [
+            275,
+            4412
+          ]
+        ]
+      },
+      "inference_seconds": 1.6183858000003966,
+      "milliseconds_per_review": 0.2915485137813721,
+      "artifact_mb": 2.7129859924316406
+    },
+    "limitations": [
+      "DistilBERT est adapté à SST-2, pas entraîné sur les avis Amazon : comparaison de deux stratégies, pas de familles optimisées également.",
+      "Troncature aux 256 premiers tokens pour le transformer ; le modèle lexical utilise le texte complet.",
+      "Débit en lots, tokenisation incluse, après échauffement ; ne représente pas la latence d'une requête isolée.",
+      "RSS observée du processus complet (Torch, données et modèle), pas la mémoire isolée du seul transformer.",
+      "Le test déjà inspecté reste une référence de comparaison ; toute optimisation ultérieure demandera un nouveau test."
+    ]
+  },
+  "comparison": {
+    "difference_transformer_minus_lexical": -0.09708338048596143,
+    "percentile_interval_95": [
+      -0.11135088423923761,
+      -0.0821111766047298
+    ],
+    "bootstrap_repetitions": 2000,
+    "seed": 2026,
+    "test_rows": 5551,
+    "limitations": "Bootstrap apparié par avis sur le test partagé ; suppose des avis indépendants. Ne corrige pas les dépendances entre produits/auteurs ni les biais de labels ou de corpus."
   }
 }

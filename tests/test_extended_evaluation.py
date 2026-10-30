@@ -2,6 +2,12 @@ import json
 import pandas as pd
 import pytest
 from sentiment.data import ROOT
+import numpy as np
+from scripts.compare_models import macro_f1
+
+
+def test_macro_f1_bootstrap_statistic():
+    assert macro_f1(np.array([0, 0, 1, 1]), np.array([0, 1, 1, 1])) == pytest.approx((2/3 + 4/5)/2)
 
 
 @pytest.mark.skipif(not (ROOT / "reports/unseen_products_splits.csv").exists(), reason="Évaluations complémentaires requises")
