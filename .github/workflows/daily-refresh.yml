@@ -49,3 +49,6 @@ jobs:
           path: portfolio/dist
       - uses: actions/deploy-pages@v4
         id: deployment
+      - name: Signaler un échec Reddit après déploiement de son statut
+        run: |
+          python -c "import json; from pathlib import Path; r=json.loads(Path('portfolio/dist/refresh.json').read_text()); raise SystemExit(1 if r['reddit']['status']=='error' else 0)"
