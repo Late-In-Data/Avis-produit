@@ -1,0 +1,69 @@
+{
+  "rows": 80,
+  "rating_model_errors": 40,
+  "assisted_sentiments": {
+    "Négatif": 40,
+    "Positif": 33,
+    "Mixte": 6,
+    "Indéterminé": 1
+  },
+  "primary_patterns": {
+    "comparaison": 11,
+    "reserves_secondaires": 10,
+    "hors_alimentaire": 10,
+    "aspects_opposes": 9,
+    "insatisfaction_explicite": 7,
+    "livraison": 6,
+    "satisfaction_explicite": 5,
+    "evolution_experience": 4,
+    "negation": 4,
+    "opposition_initiale": 3,
+    "note_texte": 2,
+    "autre_avis": 2,
+    "attenuation": 2,
+    "digression": 1,
+    "texte_long": 1,
+    "ironie_possible": 1,
+    "prix": 1,
+    "defaut_produit": 1
+  },
+  "possible_rating_mismatches": [
+    "R031",
+    "R071"
+  ],
+  "outside_food_examples": [
+    "R019",
+    "R026",
+    "R037",
+    "R042",
+    "R049",
+    "R052",
+    "R059",
+    "R062",
+    "R064",
+    "R074"
+  ],
+  "error_patterns": {
+    "aspects_opposes": 8,
+    "hors_alimentaire": 8,
+    "comparaison": 5,
+    "reserves_secondaires": 5,
+    "negation": 3,
+    "evolution_experience": 3,
+    "note_texte": 2,
+    "prix": 1,
+    "digression": 1,
+    "livraison": 1,
+    "insatisfaction_explicite": 1,
+    "autre_avis": 1,
+    "opposition_initiale": 1
+  },
+  "limitations": [
+    "Annotations assistées par IA après lecture des textes, non validées par un humain.",
+    "Notes et prédictions visibles pendant la revue : protocole non aveugle.",
+    "20 avis par cellule de confusion : surreprésentation intentionnelle des erreurs.",
+    "Catégorie principale subjective et exclusive ; plusieurs phénomènes peuvent coexister.",
+    "Les comptes décrivent ces 80 avis et ne sont pas des estimations du corpus.",
+    "Le test a maintenant été inspecté ; il ne doit plus guider des ajustements présentés comme évalués indépendamment."
+  ]
+}

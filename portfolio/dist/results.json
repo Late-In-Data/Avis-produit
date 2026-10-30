@@ -1,0 +1,520 @@
+{
+  "initial": {
+    "selected_model": "Régression logistique",
+    "selection_metric": "macro-F1 sur validation",
+    "validation": {
+      "Régression logistique": {
+        "accuracy": 0.9209009009009009,
+        "macro_f1": 0.859970749866994,
+        "report": {
+          "Négatif": {
+            "precision": 0.7073170731707317,
+            "recall": 0.8391203703703703,
+            "f1-score": 0.7676019057702488,
+            "support": 864.0
+          },
+          "Positif": {
+            "precision": 0.9692817679558011,
+            "recall": 0.9359795134443022,
+            "f1-score": 0.952339593963739,
+            "support": 4686.0
+          },
+          "accuracy": 0.9209009009009009,
+          "macro avg": {
+            "precision": 0.8382994205632663,
+            "recall": 0.8875499419073363,
+            "f1-score": 0.859970749866994,
+            "support": 5550.0
+          },
+          "weighted avg": {
+            "precision": 0.9285002370919633,
+            "recall": 0.9209009009009009,
+            "f1-score": 0.9235804295314552,
+            "support": 5550.0
+          }
+        },
+        "confusion_matrix": [
+          [
+            725,
+            139
+          ],
+          [
+            300,
+            4386
+          ]
+        ]
+      },
+      "Naive Bayes": {
+        "accuracy": 0.870990990990991,
+        "macro_f1": 0.6155350987487911,
+        "report": {
+          "Négatif": {
+            "precision": 0.9567901234567902,
+            "recall": 0.17939814814814814,
+            "f1-score": 0.30214424951267055,
+            "support": 864.0
+          },
+          "Positif": {
+            "precision": 0.8684112843355605,
+            "recall": 0.9985061886470337,
+            "f1-score": 0.9289259479849117,
+            "support": 4686.0
+          },
+          "accuracy": 0.870990990990991,
+          "macro avg": {
+            "precision": 0.9126007038961753,
+            "recall": 0.5889521683975909,
+            "f1-score": 0.6155350987487911,
+            "support": 5550.0
+          },
+          "weighted avg": {
+            "precision": 0.8821697198311899,
+            "recall": 0.870990990990991,
+            "f1-score": 0.8313512835740979,
+            "support": 5550.0
+          }
+        },
+        "confusion_matrix": [
+          [
+            155,
+            709
+          ],
+          [
+            7,
+            4679
+          ]
+        ]
+      }
+    },
+    "test": {
+      "accuracy": 0.9264997297784183,
+      "macro_f1": 0.8688120371829211,
+      "report": {
+        "Négatif": {
+          "precision": 0.7266401590457257,
+          "recall": 0.8460648148148148,
+          "f1-score": 0.7818181818181819,
+          "support": 864.0
+        },
+        "Positif": {
+          "precision": 0.9707370737073707,
+          "recall": 0.9413270748879881,
+          "f1-score": 0.9558058925476604,
+          "support": 4687.0
+        },
+        "accuracy": 0.9264997297784183,
+        "macro avg": {
+          "precision": 0.8486886163765481,
+          "recall": 0.8936959448514015,
+          "f1-score": 0.8688120371829211,
+          "support": 5551.0
+        },
+        "weighted avg": {
+          "precision": 0.9327439671918489,
+          "recall": 0.9264997297784183,
+          "f1-score": 0.928725117539505,
+          "support": 5551.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          731,
+          133
+        ],
+        [
+          275,
+          4412
+        ]
+      ]
+    },
+    "baseline": {
+      "accuracy": 0.8443523689425328,
+      "macro_f1": 0.45780425864426644,
+      "report": {
+        "Négatif": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 864.0
+        },
+        "Positif": {
+          "precision": 0.8443523689425328,
+          "recall": 1.0,
+          "f1-score": 0.9156085172885329,
+          "support": 4687.0
+        },
+        "accuracy": 0.8443523689425328,
+        "macro avg": {
+          "precision": 0.4221761844712664,
+          "recall": 0.5,
+          "f1-score": 0.45780425864426644,
+          "support": 5551.0
+        },
+        "weighted avg": {
+          "precision": 0.7129309229388672,
+          "recall": 0.8443523689425328,
+          "f1-score": 0.7730962205965327,
+          "support": 5551.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          0,
+          864
+        ],
+        [
+          0,
+          4687
+        ]
+      ]
+    },
+    "labels": [
+      "Négatif",
+      "Positif"
+    ],
+    "seed": 42,
+    "split_counts": {
+      "train": 25902,
+      "validation": 5550,
+      "test": 5551
+    },
+    "split_class_counts": {
+      "train": {
+        "Positif": 21870,
+        "Négatif": 4032
+      },
+      "validation": {
+        "Positif": 4686,
+        "Négatif": 864
+      },
+      "test": {
+        "Positif": 4687,
+        "Négatif": 864
+      }
+    },
+    "sklearn_version": "1.9.1",
+    "elapsed_seconds": 19.3,
+    "features": "Texte du corps uniquement ; aucune note, date, identité ou fiche produit.",
+    "limitations": [
+      "Labels déduits des notes, sans annotation humaine du sentiment.",
+      "Textes normalisés uniques ; les paraphrases et auteurs communs peuvent subsister.",
+      "Split aléatoire stratifié : ne mesure pas un déploiement futur ni des produits jamais vus.",
+      "Avis alimentaires historiques en anglais ; pas de validation en français ni par aspect."
+    ]
+  },
+  "robustness": {
+    "temporal": {
+      "test": {
+        "accuracy": 0.9242505833782085,
+        "macro_f1": 0.8739611680466293,
+        "report": {
+          "Négatif": {
+            "precision": 0.7436131386861314,
+            "recall": 0.852510460251046,
+            "f1-score": 0.7943469785575049,
+            "support": 956.0
+          },
+          "Positif": {
+            "precision": 0.9684916201117318,
+            "recall": 0.9391115926327194,
+            "f1-score": 0.9535753575357536,
+            "support": 4615.0
+          },
+          "accuracy": 0.9242505833782085,
+          "macro avg": {
+            "precision": 0.8560523793989316,
+            "recall": 0.8958110264418827,
+            "f1-score": 0.8739611680466293,
+            "support": 5571.0
+          },
+          "weighted avg": {
+            "precision": 0.9299018106981842,
+            "recall": 0.9242505833782085,
+            "f1-score": 0.9262512989640059,
+            "support": 5571.0
+          }
+        },
+        "confusion_matrix": [
+          [
+            815,
+            141
+          ],
+          [
+            281,
+            4334
+          ]
+        ]
+      },
+      "baseline": {
+        "accuracy": 0.828397056183809,
+        "macro_f1": 0.4530728450814844,
+        "report": {
+          "Négatif": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 956.0
+          },
+          "Positif": {
+            "precision": 0.828397056183809,
+            "recall": 1.0,
+            "f1-score": 0.9061456901629688,
+            "support": 4615.0
+          },
+          "accuracy": 0.828397056183809,
+          "macro avg": {
+            "precision": 0.4141985280919045,
+            "recall": 0.5,
+            "f1-score": 0.4530728450814844,
+            "support": 5571.0
+          },
+          "weighted avg": {
+            "precision": 0.6862416826940009,
+            "recall": 0.828397056183809,
+            "f1-score": 0.7506484222046492,
+            "support": 5571.0
+          }
+        },
+        "confusion_matrix": [
+          [
+            0,
+            956
+          ],
+          [
+            0,
+            4615
+          ]
+        ]
+      },
+      "counts": {
+        "train": 25893,
+        "validation": 5539,
+        "test": 5571
+      },
+      "classes": {
+        "train": {
+          "Positif": 22119,
+          "Négatif": 3774
+        },
+        "validation": {
+          "Positif": 4509,
+          "Négatif": 1030
+        },
+        "test": {
+          "Positif": 4615,
+          "Négatif": 956
+        }
+      },
+      "periods": {
+        "train": [
+          "1999-12-06T00:00:00+00:00",
+          "2012-02-08T00:00:00+00:00"
+        ],
+        "validation": [
+          "2012-02-09T00:00:00+00:00",
+          "2012-06-26T00:00:00+00:00"
+        ],
+        "test": [
+          "2012-06-27T00:00:00+00:00",
+          "2012-10-26T00:00:00+00:00"
+        ]
+      },
+      "overlap_products_train_test": 1513,
+      "protocol": "Pipeline et hyperparamètres V1 figés ; ajustement sur train uniquement. Validation réservée, non utilisée pour sélectionner ou régler le modèle."
+    },
+    "unseen_products": {
+      "test": {
+        "accuracy": 0.9224407278073884,
+        "macro_f1": 0.8602905778212626,
+        "report": {
+          "Négatif": {
+            "precision": 0.7091836734693877,
+            "recall": 0.8353365384615384,
+            "f1-score": 0.7671081677704195,
+            "support": 832.0
+          },
+          "Positif": {
+            "precision": 0.9692893969961892,
+            "recall": 0.9381644608374918,
+            "f1-score": 0.9534729878721059,
+            "support": 4609.0
+          },
+          "accuracy": 0.9224407278073884,
+          "macro avg": {
+            "precision": 0.8392365352327884,
+            "recall": 0.8867504996495151,
+            "f1-score": 0.8602905778212626,
+            "support": 5441.0
+          },
+          "weighted avg": {
+            "precision": 0.9295158329501869,
+            "recall": 0.9224407278073884,
+            "f1-score": 0.9249753715654337,
+            "support": 5441.0
+          }
+        },
+        "confusion_matrix": [
+          [
+            695,
+            137
+          ],
+          [
+            285,
+            4324
+          ]
+        ]
+      },
+      "baseline": {
+        "accuracy": 0.8470869325491638,
+        "macro_f1": 0.45860696517412936,
+        "report": {
+          "Négatif": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 832.0
+          },
+          "Positif": {
+            "precision": 0.8470869325491638,
+            "recall": 1.0,
+            "f1-score": 0.9172139303482587,
+            "support": 4609.0
+          },
+          "accuracy": 0.8470869325491638,
+          "macro avg": {
+            "precision": 0.4235434662745819,
+            "recall": 0.5,
+            "f1-score": 0.45860696517412936,
+            "support": 5441.0
+          },
+          "weighted avg": {
+            "precision": 0.7175562712955514,
+            "recall": 0.8470869325491638,
+            "f1-score": 0.7769599347500689,
+            "support": 5441.0
+          }
+        },
+        "confusion_matrix": [
+          [
+            0,
+            832
+          ],
+          [
+            0,
+            4609
+          ]
+        ]
+      },
+      "counts": {
+        "train": 25921,
+        "validation": 5641,
+        "test": 5441
+      },
+      "classes": {
+        "train": {
+          "Positif": 21872,
+          "Négatif": 4049
+        },
+        "validation": {
+          "Positif": 4762,
+          "Négatif": 879
+        },
+        "test": {
+          "Positif": 4609,
+          "Négatif": 832
+        }
+      },
+      "periods": {
+        "train": [
+          "1999-12-06T00:00:00+00:00",
+          "2012-10-26T00:00:00+00:00"
+        ],
+        "validation": [
+          "2002-05-23T00:00:00+00:00",
+          "2012-10-26T00:00:00+00:00"
+        ],
+        "test": [
+          "2003-11-20T00:00:00+00:00",
+          "2012-10-26T00:00:00+00:00"
+        ]
+      },
+      "overlap_products_train_test": 0,
+      "protocol": "Pipeline et hyperparamètres V1 figés ; ajustement sur train uniquement. Validation réservée, non utilisée pour sélectionner ou régler le modèle."
+    },
+    "limitations": [
+      "Deux stress tests séparés : pas de garantie simultanée sur produits inconnus et période future.",
+      "Un produit est identifié par l'ASIN conservé lors de la déduplication ; variantes et familles ne sont pas regroupées.",
+      "Les dates restent dans le corpus historique, jusqu'en 2012.",
+      "Les trois tests portent sur des populations différentes ; les écarts ne sont pas des effets causaux."
+    ]
+  },
+  "review": {
+    "rows": 80,
+    "rating_model_errors": 40,
+    "assisted_sentiments": {
+      "Négatif": 40,
+      "Positif": 33,
+      "Mixte": 6,
+      "Indéterminé": 1
+    },
+    "primary_patterns": {
+      "comparaison": 11,
+      "reserves_secondaires": 10,
+      "hors_alimentaire": 10,
+      "aspects_opposes": 9,
+      "insatisfaction_explicite": 7,
+      "livraison": 6,
+      "satisfaction_explicite": 5,
+      "evolution_experience": 4,
+      "negation": 4,
+      "opposition_initiale": 3,
+      "note_texte": 2,
+      "autre_avis": 2,
+      "attenuation": 2,
+      "digression": 1,
+      "texte_long": 1,
+      "ironie_possible": 1,
+      "prix": 1,
+      "defaut_produit": 1
+    },
+    "possible_rating_mismatches": [
+      "R031",
+      "R071"
+    ],
+    "outside_food_examples": [
+      "R019",
+      "R026",
+      "R037",
+      "R042",
+      "R049",
+      "R052",
+      "R059",
+      "R062",
+      "R064",
+      "R074"
+    ],
+    "error_patterns": {
+      "aspects_opposes": 8,
+      "hors_alimentaire": 8,
+      "comparaison": 5,
+      "reserves_secondaires": 5,
+      "negation": 3,
+      "evolution_experience": 3,
+      "note_texte": 2,
+      "prix": 1,
+      "digression": 1,
+      "livraison": 1,
+      "insatisfaction_explicite": 1,
+      "autre_avis": 1,
+      "opposition_initiale": 1
+    },
+    "limitations": [
+      "Annotations assistées par IA après lecture des textes, non validées par un humain.",
+      "Notes et prédictions visibles pendant la revue : protocole non aveugle.",
+      "20 avis par cellule de confusion : surreprésentation intentionnelle des erreurs.",
+      "Catégorie principale subjective et exclusive ; plusieurs phénomènes peuvent coexister.",
+      "Les comptes décrivent ces 80 avis et ne sont pas des estimations du corpus.",
+      "Le test a maintenant été inspecté ; il ne doit plus guider des ajustements présentés comme évalués indépendamment."
+    ]
+  }
+}

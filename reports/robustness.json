@@ -1,0 +1,246 @@
+{
+  "temporal": {
+    "test": {
+      "accuracy": 0.9242505833782085,
+      "macro_f1": 0.8739611680466293,
+      "report": {
+        "Négatif": {
+          "precision": 0.7436131386861314,
+          "recall": 0.852510460251046,
+          "f1-score": 0.7943469785575049,
+          "support": 956.0
+        },
+        "Positif": {
+          "precision": 0.9684916201117318,
+          "recall": 0.9391115926327194,
+          "f1-score": 0.9535753575357536,
+          "support": 4615.0
+        },
+        "accuracy": 0.9242505833782085,
+        "macro avg": {
+          "precision": 0.8560523793989316,
+          "recall": 0.8958110264418827,
+          "f1-score": 0.8739611680466293,
+          "support": 5571.0
+        },
+        "weighted avg": {
+          "precision": 0.9299018106981842,
+          "recall": 0.9242505833782085,
+          "f1-score": 0.9262512989640059,
+          "support": 5571.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          815,
+          141
+        ],
+        [
+          281,
+          4334
+        ]
+      ]
+    },
+    "baseline": {
+      "accuracy": 0.828397056183809,
+      "macro_f1": 0.4530728450814844,
+      "report": {
+        "Négatif": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 956.0
+        },
+        "Positif": {
+          "precision": 0.828397056183809,
+          "recall": 1.0,
+          "f1-score": 0.9061456901629688,
+          "support": 4615.0
+        },
+        "accuracy": 0.828397056183809,
+        "macro avg": {
+          "precision": 0.4141985280919045,
+          "recall": 0.5,
+          "f1-score": 0.4530728450814844,
+          "support": 5571.0
+        },
+        "weighted avg": {
+          "precision": 0.6862416826940009,
+          "recall": 0.828397056183809,
+          "f1-score": 0.7506484222046492,
+          "support": 5571.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          0,
+          956
+        ],
+        [
+          0,
+          4615
+        ]
+      ]
+    },
+    "counts": {
+      "train": 25893,
+      "validation": 5539,
+      "test": 5571
+    },
+    "classes": {
+      "train": {
+        "Positif": 22119,
+        "Négatif": 3774
+      },
+      "validation": {
+        "Positif": 4509,
+        "Négatif": 1030
+      },
+      "test": {
+        "Positif": 4615,
+        "Négatif": 956
+      }
+    },
+    "periods": {
+      "train": [
+        "1999-12-06T00:00:00+00:00",
+        "2012-02-08T00:00:00+00:00"
+      ],
+      "validation": [
+        "2012-02-09T00:00:00+00:00",
+        "2012-06-26T00:00:00+00:00"
+      ],
+      "test": [
+        "2012-06-27T00:00:00+00:00",
+        "2012-10-26T00:00:00+00:00"
+      ]
+    },
+    "overlap_products_train_test": 1513,
+    "protocol": "Pipeline et hyperparamètres V1 figés ; ajustement sur train uniquement. Validation réservée, non utilisée pour sélectionner ou régler le modèle."
+  },
+  "unseen_products": {
+    "test": {
+      "accuracy": 0.9224407278073884,
+      "macro_f1": 0.8602905778212626,
+      "report": {
+        "Négatif": {
+          "precision": 0.7091836734693877,
+          "recall": 0.8353365384615384,
+          "f1-score": 0.7671081677704195,
+          "support": 832.0
+        },
+        "Positif": {
+          "precision": 0.9692893969961892,
+          "recall": 0.9381644608374918,
+          "f1-score": 0.9534729878721059,
+          "support": 4609.0
+        },
+        "accuracy": 0.9224407278073884,
+        "macro avg": {
+          "precision": 0.8392365352327884,
+          "recall": 0.8867504996495151,
+          "f1-score": 0.8602905778212626,
+          "support": 5441.0
+        },
+        "weighted avg": {
+          "precision": 0.9295158329501869,
+          "recall": 0.9224407278073884,
+          "f1-score": 0.9249753715654337,
+          "support": 5441.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          695,
+          137
+        ],
+        [
+          285,
+          4324
+        ]
+      ]
+    },
+    "baseline": {
+      "accuracy": 0.8470869325491638,
+      "macro_f1": 0.45860696517412936,
+      "report": {
+        "Négatif": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 832.0
+        },
+        "Positif": {
+          "precision": 0.8470869325491638,
+          "recall": 1.0,
+          "f1-score": 0.9172139303482587,
+          "support": 4609.0
+        },
+        "accuracy": 0.8470869325491638,
+        "macro avg": {
+          "precision": 0.4235434662745819,
+          "recall": 0.5,
+          "f1-score": 0.45860696517412936,
+          "support": 5441.0
+        },
+        "weighted avg": {
+          "precision": 0.7175562712955514,
+          "recall": 0.8470869325491638,
+          "f1-score": 0.7769599347500689,
+          "support": 5441.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          0,
+          832
+        ],
+        [
+          0,
+          4609
+        ]
+      ]
+    },
+    "counts": {
+      "train": 25921,
+      "validation": 5641,
+      "test": 5441
+    },
+    "classes": {
+      "train": {
+        "Positif": 21872,
+        "Négatif": 4049
+      },
+      "validation": {
+        "Positif": 4762,
+        "Négatif": 879
+      },
+      "test": {
+        "Positif": 4609,
+        "Négatif": 832
+      }
+    },
+    "periods": {
+      "train": [
+        "1999-12-06T00:00:00+00:00",
+        "2012-10-26T00:00:00+00:00"
+      ],
+      "validation": [
+        "2002-05-23T00:00:00+00:00",
+        "2012-10-26T00:00:00+00:00"
+      ],
+      "test": [
+        "2003-11-20T00:00:00+00:00",
+        "2012-10-26T00:00:00+00:00"
+      ]
+    },
+    "overlap_products_train_test": 0,
+    "protocol": "Pipeline et hyperparamètres V1 figés ; ajustement sur train uniquement. Validation réservée, non utilisée pour sélectionner ou régler le modèle."
+  },
+  "limitations": [
+    "Deux stress tests séparés : pas de garantie simultanée sur produits inconnus et période future.",
+    "Un produit est identifié par l'ASIN conservé lors de la déduplication ; variantes et familles ne sont pas regroupées.",
+    "Les dates restent dans le corpus historique, jusqu'en 2012.",
+    "Les trois tests portent sur des populations différentes ; les écarts ne sont pas des effets causaux."
+  ]
+}
