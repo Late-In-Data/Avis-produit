@@ -6,7 +6,7 @@ Cette revue a été réalisée par Codex avec assistance IA après lecture inté
 
 `scripts/prepare_review.py` sélectionne aléatoirement 20 avis dans chacune des quatre cellules de la matrice de confusion du test initial, puis mélange l'ordre. Graine de sélection : 2026 ; graine de mélange : 2027. Cela donne 40 erreurs et 40 prédictions conformes à la note. Les erreurs sont volontairement surreprésentées : aucun pourcentage issu de ces 80 avis ne doit être extrapolé au corpus.
 
-Chaque avis possède un identifiant R001–R080 et un hash SHA-256 du texte normalisé. Les annotations et justifications sont suivies dans `reports/assisted_annotations.csv`. Les textes se régénèrent depuis la source publique avec les scripts ; ils ne sont pas republiés dans le dépôt.
+Chaque avis possède un identifiant R001–R080 et un hash SHA-256 du texte normalisé. Les annotations et justifications sont conservées localement dans `reports/assisted_annotations.csv`, accessible dans l'application Streamlit. Ce fichier détaillé n'est pas publié par défaut. Les textes se régénèrent depuis la source publique avec les scripts ; ils ne sont pas republiés dans le dépôt. La synthèse et sa méthode sont publiques.
 
 La lecture assistée attribue un sentiment global parmi positif, négatif, mixte ou indéterminé, une catégorie explicative principale et une justification courte. Ce vocabulaire sert à l'analyse des erreurs : **le modèle de production reste binaire**. Une réserve mineure ne rend pas automatiquement un avis mixte : on retient l'appréciation dominante lorsqu'elle est explicite.
 

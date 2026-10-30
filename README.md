@@ -8,6 +8,8 @@ Une première application de portfolio qui explore de vrais avis alimentaires Am
 
 Le projet comprend maintenant des stress tests temporels et par produit inconnu, une revue qualitative assistée de 80 avis, une comparaison avec un transformer préentraîné et une démo du modèle dans le navigateur. Le modèle interactif reste binaire.
 
+**[Essayer la démonstration web](https://late-in-data.github.io/Avis-produit/)** · [Code et rapports](https://github.com/Late-In-Data/Avis-produit) · [Tests automatisés](https://github.com/Late-In-Data/Avis-produit/actions)
+
 ## Ouvrir la version installée
 
 Depuis le dossier `Avis-produit`, dans PowerShell :
@@ -122,7 +124,7 @@ Le test temporel suit un entraînement jusqu'au 8 février 2012, une validation 
 
 ### Revue qualitative assistée
 
-80 avis ont été lus intégralement avec assistance IA, à raison de 20 par cellule de confusion : 40 erreurs et 40 prédictions conformes à la note. Les annotations sont dans [reports/assisted_annotations.csv](reports/assisted_annotations.csv) et la méthode dans [docs/revue-qualitative.md](docs/revue-qualitative.md).
+80 avis ont été lus intégralement avec assistance IA, à raison de 20 par cellule de confusion : 40 erreurs et 40 prédictions conformes à la note. Les annotations détaillées sont conservées localement dans `reports/assisted_annotations.csv`, consultables dans Streamlit. La synthèse et la [méthode](docs/revue-qualitative.md) sont publiques.
 
 La lecture assistée repère notamment des négations, des comparaisons, des aspects opposés, deux contradictions possibles entre une note élevée et un texte négatif, ainsi que dix exemples hors alimentation. Les proportions de ce sous-ensemble enrichi en erreurs ne s'extrapolent pas au corpus. **Ce n'est pas une annotation humaine indépendante.** Un formulaire sans note ni prédiction se génère pour une future revue humaine ; il n'a pas été rempli au nom d'un humain.
 
