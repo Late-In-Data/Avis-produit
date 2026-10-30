@@ -28,6 +28,8 @@ jobs:
           python scripts/prepare_data.py
           python scripts/train.py
           python scripts/evaluate_robustness.py
+          python scripts/extract_topics.py
+          python scripts/refresh_daily.py --skip-reddit
           python scripts/prepare_review.py
           if [ -f reports/assisted_annotations.csv ]; then python scripts/summarize_review.py; fi
           python -m pytest -q

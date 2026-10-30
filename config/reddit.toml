@@ -1,0 +1,5 @@
+# Discussions publiques anglaises. Ce ne sont pas des avis Amazon ni des labels de test.
+subreddits = ["Coffee", "tea"]
+query = "review OR recommend OR taste"
+limit_per_subreddit = 100
+lookback_days = 7

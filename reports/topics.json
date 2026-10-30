@@ -1,0 +1,199 @@
+{
+  "method": "TF-IDF + NMF",
+  "n_topics": 8,
+  "seed": 42,
+  "corpus_sha256": "0ff0743cced24aff5657a4095b7ae27432f33ba8904e671f7ca254a39c74db73",
+  "source": "Amazon Fine Foods — échantillon dédupliqué",
+  "documents": 39999,
+  "unassigned": 1,
+  "topics": [
+    {
+      "id": 0,
+      "label": "Thème 1 · taste / flavor / water",
+      "keywords": [
+        "taste",
+        "flavor",
+        "water",
+        "sugar",
+        "little",
+        "add",
+        "sweet",
+        "better",
+        "tastes",
+        "sauce"
+      ],
+      "documents": 10053,
+      "binary_documents": 9100,
+      "positive": 7722,
+      "negative": 1378,
+      "three_stars": 953
+    },
+    {
+      "id": 1,
+      "label": "Thème 2 · coffee / cup / roast",
+      "keywords": [
+        "coffee",
+        "cup",
+        "roast",
+        "cup coffee",
+        "cups",
+        "strong",
+        "flavor",
+        "blend",
+        "bold",
+        "coffees"
+      ],
+      "documents": 3847,
+      "binary_documents": 3530,
+      "positive": 2997,
+      "negative": 533,
+      "three_stars": 317
+    },
+    {
+      "id": 2,
+      "label": "Thème 3 · tea / green / green tea",
+      "keywords": [
+        "tea",
+        "green",
+        "green tea",
+        "teas",
+        "drink",
+        "bags",
+        "iced",
+        "tea bags",
+        "cup",
+        "iced tea"
+      ],
+      "documents": 3188,
+      "binary_documents": 2978,
+      "positive": 2630,
+      "negative": 348,
+      "three_stars": 210
+    },
+    {
+      "id": 3,
+      "label": "Thème 4 · dog / food / dogs",
+      "keywords": [
+        "dog",
+        "food",
+        "dogs",
+        "treats",
+        "loves",
+        "cat",
+        "eat",
+        "dog food",
+        "cats",
+        "treat"
+      ],
+      "documents": 4517,
+      "binary_documents": 4228,
+      "positive": 3656,
+      "negative": 572,
+      "three_stars": 289
+    },
+    {
+      "id": 4,
+      "label": "Thème 5 · order / time / box",
+      "keywords": [
+        "order",
+        "time",
+        "box",
+        "ordered",
+        "arrived",
+        "got",
+        "received",
+        "bag",
+        "came",
+        "gift"
+      ],
+      "documents": 8366,
+      "binary_documents": 7738,
+      "positive": 5873,
+      "negative": 1865,
+      "three_stars": 628
+    },
+    {
+      "id": 5,
+      "label": "Thème 6 · free / gluten / gluten free",
+      "keywords": [
+        "free",
+        "gluten",
+        "gluten free",
+        "mix",
+        "bread",
+        "flour",
+        "cookies",
+        "sugar free",
+        "pasta",
+        "wheat"
+      ],
+      "documents": 1744,
+      "binary_documents": 1666,
+      "positive": 1515,
+      "negative": 151,
+      "three_stars": 78
+    },
+    {
+      "id": 6,
+      "label": "Thème 7 · chocolate / bars / bar",
+      "keywords": [
+        "chocolate",
+        "bars",
+        "bar",
+        "peanut",
+        "butter",
+        "peanut butter",
+        "dark",
+        "dark chocolate",
+        "snack",
+        "cookies"
+      ],
+      "documents": 3950,
+      "binary_documents": 3641,
+      "positive": 3171,
+      "negative": 470,
+      "three_stars": 309
+    },
+    {
+      "id": 7,
+      "label": "Thème 8 · price / amazon / store",
+      "keywords": [
+        "price",
+        "amazon",
+        "store",
+        "grocery",
+        "local",
+        "grocery store",
+        "stores",
+        "local grocery",
+        "cheaper",
+        "shipping"
+      ],
+      "documents": 4333,
+      "binary_documents": 4121,
+      "positive": 3678,
+      "negative": 443,
+      "three_stars": 212
+    }
+  ],
+  "n_iter": 95,
+  "converged": true,
+  "reconstruction_error": 196.3395490886561,
+  "parameters": {
+    "min_df": 10,
+    "max_df": 0.7,
+    "max_features": 8000,
+    "ngram_range": [
+      1,
+      2
+    ],
+    "stop_words": "anglais + mots génériques d'opinion et d'achat"
+  },
+  "limitations": [
+    "Thèmes exploratoires ajustés sur tout l'échantillon, y compris les trois étoiles ; aucune modification du classificateur de sentiment.",
+    "Intitulés automatiques issus des mots dominants, sans validation humaine de la cohérence des thèmes.",
+    "Un texte peut évoquer plusieurs thèmes ; le décompte utilise seulement la composante dominante et n'est pas une probabilité.",
+    "Ces thèmes globaux ne sont pas des sentiments par aspect.",
+    "Les modèles de thèmes et de sentiment ne sont pas entraînés sur Reddit ; leur application éventuelle à Reddit est hors domaine évalué."
+  ]
+}

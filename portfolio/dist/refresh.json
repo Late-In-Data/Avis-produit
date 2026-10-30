@@ -1,0 +1,25 @@
+{
+  "processed_at": "2026-10-30T16:57:03.637421+00:00",
+  "overall_status": "ok",
+  "schedule": {
+    "cron": "15 7 * * *",
+    "timezone": "Europe/Paris"
+  },
+  "amazon": {
+    "status": "historical_static",
+    "latest_review_at": "2012-10-26T00:00:00+00:00",
+    "sample_documents": 39999,
+    "topic_documents": 39999,
+    "corpus_sha256": "0ff0743cced24aff5657a4095b7ae27432f33ba8904e671f7ca254a39c74db73"
+  },
+  "reddit": {
+    "status": "not_configured",
+    "attempted_at": "2026-10-30T16:56:53.872980+00:00",
+    "prediction_scope": "Modèles Amazon appliqués sans adaptation à des discussions Reddit ; qualité non évaluée sur Reddit."
+  },
+  "notes": [
+    "La date de traitement n'est pas la date des données : Amazon reste historique jusqu'en 2012.",
+    "Un statut Reddit non configuré ou en erreur ne représente pas une collecte vide ni une collecte réussie.",
+    "Seuls les agrégats sont exportés ; les instantanés et annotations détaillés restent locaux."
+  ]
+}

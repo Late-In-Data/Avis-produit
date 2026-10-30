@@ -38,10 +38,10 @@ def test_predict_and_reject_empty_review():
 
 def test_evaluation_and_sources_pages():
     at = app()
-    for page in ["Évaluation", "Analyse approfondie", "Données et méthode"]:
+    for page in ["Évaluation", "Analyse approfondie", "Données et méthode", "Topics et actualisation"]:
         at.radio(key="page").set_value(page).run()
         assert not at.exception
         if page == "Analyse approfondie":
             assert at.dataframe
-        else:
+        elif page != "Topics et actualisation" or (ROOT / "reports/topics.json").exists():
             assert at.metric

@@ -51,7 +51,7 @@ def count_chart(frame, x, y, color=None):
 
 with st.sidebar:
     st.header("Explorer")
-    page = st.radio("Navigation", ["Vue d’ensemble", "Tester un avis", "Évaluation", "Analyse approfondie", "Données et méthode"],
+    page = st.radio("Navigation", ["Vue d’ensemble", "Tester un avis", "Topics et actualisation", "Évaluation", "Analyse approfondie", "Données et méthode"],
                     label_visibility="collapsed", key="page")
     st.divider()
     st.markdown("**Amazon Fine Foods**")
@@ -154,6 +154,56 @@ elif page == "Tester un avis":
                 st.caption("Score non calibré : ce pourcentage n’est pas une garantie de fiabilité. Le seuil de décision est 50 % ; les avis mixtes, le sarcasme et les langues non évaluées peuvent tromper le modèle.")
                 if .35 <= score <= .65:
                     st.warning("Le score est proche du seuil : relis cet avis avant de retenir la classe prédite.")
+
+elif page == "Topics et actualisation":
+    st.subheader("Quels thèmes reviennent dans les avis ?")
+    topic_path = ROOT / "reports/topics.json"
+    if topic_path.exists():
+        topic_report = load_json("reports/topics.json", topic_path.stat().st_mtime)
+        st.caption("Thèmes globaux exploratoires extraits automatiquement avec TF-IDF et NMF sur tout l’échantillon Amazon. Les intitulés reprennent les mots dominants ; ils ne sont pas validés par un humain. La prédiction de sentiment reste positif/négatif.")
+        with st.container(horizontal=True):
+            st.metric("Thèmes extraits", topic_report["n_topics"], border=True)
+            st.metric("Avis analysés", topic_report["documents"], border=True)
+            st.metric("Sans composante reconnue", topic_report["unassigned"], border=True)
+        topic_frame = pd.DataFrame(topic_report["topics"])
+        display = topic_frame[["label", "documents", "positive", "negative", "three_stars"]].rename(columns={
+            "label": "Thème dominant", "documents": "Avis", "positive": "Notes 4–5", "negative": "Notes 1–2", "three_stars": "Notes 3"})
+        st.dataframe(display, hide_index=True, alt="Nombre d’avis et répartition des notes selon le thème dominant")
+        chart = alt.Chart(display).mark_bar().encode(y=alt.Y("Thème dominant:N", title=None, sort="-x"),
+            x=alt.X("Avis:Q", scale=alt.Scale(zero=True)), tooltip=list(display.columns))
+        st.altair_chart(chart, alt="Nombre d’avis par thème dominant extrait automatiquement")
+        selected = st.selectbox("Explorer un thème", topic_frame.id.tolist(),
+                                format_func=lambda index: topic_frame.loc[topic_frame.id.eq(index), "label"].iloc[0], key="topic")
+        selected_topic = next(row for row in topic_report["topics"] if row["id"] == selected)
+        st.markdown("**Mots dominants :** " + ", ".join(selected_topic["keywords"]))
+        assignments_path = ROOT / "data/processed/topic_assignments.parquet"
+        if assignments_path.exists():
+            assignments = pd.read_parquet(assignments_path)
+            subset = data.merge(assignments.loc[assignments.topic_id.eq(selected)], on="text_key", validate="one_to_one")
+            st.caption("Exemples locaux classés par dominance de la composante. Ce score n’est pas une probabilité ni une mesure validée de pertinence.")
+            st.dataframe(subset.sort_values("topic_strength", ascending=False)[["score", "text"]].head(10).rename(columns={"score": "Étoiles", "text": "Avis"}),
+                         hide_index=True, alt="Exemples d’avis liés au thème choisi")
+        st.download_button("Télécharger la synthèse des thèmes", topic_path.read_bytes(), "topics.json", "application/json")
+        st.info("Un avis peut évoquer plusieurs thèmes ; les volumes retiennent seulement la composante dominante. Ces thèmes ne constituent pas une analyse de sentiment par aspect.")
+    else:
+        st.info("Lance scripts/extract_topics.py pour calculer les thèmes sur les avis Amazon.")
+    st.subheader("Actualisation et source Reddit")
+    refresh_path = ROOT / "data/live/daily_refresh.json"
+    if refresh_path.exists():
+        refresh = load_json("data/live/daily_refresh.json", refresh_path.stat().st_mtime)
+        processed = pd.Timestamp(refresh["processed_at"]).tz_convert("Europe/Paris").strftime("%d/%m/%Y à %H:%M")
+        st.markdown(f"**Dernier traitement terminé :** {processed}, heure de Paris · **Planification :** chaque jour à 7 h 15 via GitHub Actions.")
+        st.caption(f"Dernier avis Amazon : {refresh['amazon']['latest_review_at'][:10]}. Recalculer l’application ne crée pas de nouveaux avis dans ce corpus historique.")
+        reddit = refresh["reddit"]
+        status_labels = {"not_configured": "Identifiants absents — aucune collecte effectuée", "approval_required": "Accès Reddit à approuver", "disabled": "Collecte désactivée", "ok": "Collecte terminée", "error": "Échec de collecte — données non actualisées"}
+        st.markdown("**Reddit :** " + status_labels.get(reddit["status"], reddit["status"]))
+        if reddit["status"] == "ok":
+            st.metric("Discussions collectées", reddit["documents"], border=True)
+            st.caption(f"Collecte du {reddit['collected_at']}. Les comptes positifs/négatifs sont des prédictions d’un modèle Amazon, sans validation sur Reddit. Les discussions Reddit ne sont pas des avis produits labellisés.")
+            st.json({key: reddit[key] for key in ["predicted_positive", "predicted_negative", "topics"] if key in reddit})
+        st.link_button("Consulter les exécutions quotidiennes", "https://github.com/Late-In-Data/Avis-produit/actions/workflows/daily-refresh.yml")
+    else:
+        st.info("Lance scripts/refresh_daily.py pour recalculer les agrégats et vérifier la configuration Reddit.")
 
 elif page == "Évaluation":
     st.subheader("Mesurer avant de conclure")

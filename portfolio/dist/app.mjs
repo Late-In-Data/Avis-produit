@@ -1,4 +1,5 @@
 import {predict} from './model.mjs';
+import './topics.mjs';
 const examples = {
   positive: 'This coffee tastes wonderful. It arrived fresh and I will definitely buy it again.',
   negative: 'This food tastes horrible and stale. A complete waste of money. I will not buy it again.',

@@ -9,3 +9,6 @@ portfolio
 .site-publish
 *.log
 .streamlit/secrets.toml
+.env
+.env.*
+praw.ini

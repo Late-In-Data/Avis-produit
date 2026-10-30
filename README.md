@@ -8,6 +8,8 @@ Une première application de portfolio qui explore de vrais avis alimentaires Am
 
 Le projet comprend maintenant des stress tests temporels et par produit inconnu, une revue qualitative assistée de 80 avis, une comparaison avec un transformer préentraîné et une démo du modèle dans le navigateur. Le modèle interactif reste binaire.
 
+**Ajouts :** extraction automatique de 8 thèmes, page « Topics et actualisation », collecteur PRAW préparé et workflow d'actualisation/déploiement quotidien à 7 h 15 (Europe/Paris). **Reddit reste inactif**, sans accès approuvé ni identifiants. [Configuration et limites](docs/reddit-et-actualisation.md).
+
 **[Essayer la démonstration web](https://late-in-data.github.io/Avis-produit/)** · [Code et rapports](https://github.com/Late-In-Data/Avis-produit) · [Tests automatisés](https://github.com/Late-In-Data/Avis-produit/actions)
 
 ![Résultats de la démonstration publique](docs/screenshots/demo-publique.jpg)
@@ -34,6 +36,7 @@ Ouvrir ensuite http://localhost:8501. Le terminal doit rester ouvert ; `Ctrl+C` 
 - **Tester un avis** : classification binaire d'un texte anglais par un modèle entraîné sur les données réelles.
 - **Évaluation** : comparaison sur validation, résultats sur un test indépendant, référence majoritaire, métriques par classe, matrice de confusion et exemples d'erreurs.
 - **Analyse approfondie** : stress tests complémentaires, revue assistée, formulaire de revue humaine et benchmark transformer lorsqu'il a été calculé.
+- **Topics et actualisation** : thèmes NMF, volumes et exemples locaux, dernier traitement et statut explicite de Reddit.
 - **Données et méthode** : source, règles de labels, exclusions, audit, limites et empreinte SHA-256.
 
 ## Pourquoi conserver le sentiment global ?
@@ -72,6 +75,8 @@ if (Test-Path reports\assisted_annotations.csv) { .venv\Scripts\python.exe scrip
 uv pip install --python .venv\Scripts\python.exe -r requirements-evaluation.txt
 .venv\Scripts\python.exe scripts\benchmark_transformer.py
 .venv\Scripts\python.exe scripts\compare_models.py
+.venv\Scripts\python.exe scripts\extract_topics.py
+.venv\Scripts\python.exe scripts\refresh_daily.py
 .venv\Scripts\python.exe scripts\export_portfolio.py
 .venv\Scripts\python.exe scripts\check_export.py
 ```
@@ -178,7 +183,7 @@ GitHub Actions exécute les tests sans télécharger le corpus à chaque push. L
 - L'échantillonnage de textes uniques modifie les proportions et la représentation des produits ; les graphiques décrivent cet échantillon, pas tout Amazon.
 - Un texte réutilisé pour plusieurs produits est attribué à sa première occurrence. Les noms des produits sont absents ; seuls les identifiants sont affichés.
 - La déduplication ne supprime pas les paraphrases. Des auteurs et produits communs peuvent subsister entre ensembles : le test n'est ni une validation temporelle ni une validation sur des produits inconnus.
-- Aucun flux Reddit, rafraîchissement quotidien ou sentiment par aspect. Le transformer est un benchmark expérimental distinct ; la prédiction interactive reste lexicale.
+- Le collecteur Reddit est préparé et testé hors connexion, mais reste inactif tant que l'accès approuvé et les identifiants ne sont pas configurés. Le workflow quotidien recalcule et redéploie la démo publique ; l'archive Amazon ne reçoit pas de nouveaux avis. Aucune analyse de sentiment par aspect. Le transformer reste un benchmark distinct.
 - Les fichiers du modèle sont des artefacts locaux de confiance. Ne pas remplacer un fichier Joblib par un modèle provenant d'une source inconnue.
 
 ## Fichiers produits
